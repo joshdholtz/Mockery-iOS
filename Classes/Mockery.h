@@ -18,7 +18,10 @@ typedef MockeryResponse* (^ResponseBlock)(NSString *, NSURLRequest*, NSArray *ro
 + (NSString*)urlPrefix;
 
 + (void)get:(id)pathStringOrRegex block:(ResponseBlock)responseBlock;
++ (void)post:(id)pathStringOrRegex block:(ResponseBlock)responseBlock;
++ (void)put:(id)pathStringOrRegex block:(ResponseBlock)responseBlock;
++ (void)delete:(id)pathStringOrRegex block:(ResponseBlock)responseBlock;
 
-+ (MockeryResponse*)get:(NSURLRequest*)request;
++ (MockeryResponse*)hit:(NSURLRequest*)request;
 
 @end

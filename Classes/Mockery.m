@@ -41,12 +41,36 @@ static Mockery *sharedInstance = nil;
     return sharedInstance.urlPrefix;
 }
 
-+ (MockeryResponse*)get:(NSURLRequest *)request {
-    return [sharedInstance findRoute:request withMockResponse:sharedInstance.mockResponsesGET];
++ (MockeryResponse*)hit:(NSURLRequest *)request {
+    NSDictionary *mockResponses;
+    NSString *method = [request.HTTPMethod uppercaseString];
+    if ([method isEqualToString:@"POST"]) {
+        mockResponses = sharedInstance.mockResponsesPOST;
+    } else if ([method isEqualToString:@"PUT"]) {
+        mockResponses = sharedInstance.mockResponsesPUT;
+    } else if ([method isEqualToString:@"DELETE"]) {
+        mockResponses = sharedInstance.mockResponsesDELETE;
+    } else {
+        mockResponses = sharedInstance.mockResponsesGET;
+    }
+    
+    return [sharedInstance findRoute:request withMockResponse:mockResponses];
 }
 
 + (void)get:(id)pathStringOrRegex block:(ResponseBlock)responseBlock {
     [sharedInstance.mockResponsesGET setObject:[responseBlock copy] forKey:pathStringOrRegex];
+}
+
++ (void)post:(id)pathStringOrRegex block:(ResponseBlock)responseBlock {
+    [sharedInstance.mockResponsesPOST setObject:[responseBlock copy] forKey:pathStringOrRegex];
+}
+
++ (void)put:(id)pathStringOrRegex block:(ResponseBlock)responseBlock {
+    [sharedInstance.mockResponsesPUT setObject:[responseBlock copy] forKey:pathStringOrRegex];
+}
+
++ (void)delete:(id)pathStringOrRegex block:(ResponseBlock)responseBlock {
+    [sharedInstance.mockResponsesDELETE setObject:[responseBlock copy] forKey:pathStringOrRegex];
 }
 
 - (id)initWithURL:(NSString*)urlPrefix
@@ -87,7 +111,6 @@ static Mockery *sharedInstance = nil;
                     NSArray *matches = [regEx matchesInString:route options:0 range:NSMakeRange(0, [route length])];
                     NSMutableArray *params = [NSMutableArray array];
                     for (NSTextCheckingResult *match in matches) {
-                        NSLog(@"Number - %d", [match numberOfRanges]);
                         
                         for (int i = 1; i < match.numberOfRanges; ++i) {
                             [params addObject:[route substringWithRange:[match rangeAtIndex:i]]];

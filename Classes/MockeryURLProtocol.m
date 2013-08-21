@@ -25,7 +25,7 @@
     id<NSURLProtocolClient> client = [self client];
     NSURLRequest* request = [self request];
 
-    MockeryResponse *mockeryResponse = [Mockery get:request];
+    MockeryResponse *mockeryResponse = [Mockery hit:request];
     
     NSHTTPURLResponse* response = [[NSHTTPURLResponse alloc] initWithURL:[request URL] statusCode:mockeryResponse.status HTTPVersion:@"HTTP/1.1" headerFields:[NSDictionary dictionary]];
 
