@@ -3,6 +3,8 @@ Mockery
 
 Mockery can best be described as an iOS micro web framework (similar to Ruby's Sinatra and Python's Flask). Define routes that listen for HTTP requests using GET, POST, PUT, DELETE using NSURLConnection, AFNetworking, any of your other go-to networking libraries.
 
+Mockery registeres a custom NSURLProtocol that listens for a URL that you define giving you full access to the NSURLRequest.
+
 ### Possible Uses
 The only use I have found for this (so far) is making mock APIs for rapid protyped applications. My Mockery routes read from and write to CoreData actually simulating a RESTful API which makes it pretty easy to switch the end point to a real working (server based) API.
 <br/><strong>But please, let me know how you have found Mockery useful.</strong>
