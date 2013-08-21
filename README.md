@@ -1,7 +1,7 @@
 Mockery
 ==========
 
-Mockery can best be described as an iOS micro web framework (similar to Ruby's Sinatra and Python's Flask). Define routes that listen for HTTP requests using GET, POST, PUT, DELETE using NSURLConnection, AFNetworking, any of your other go-to networking libraries.
+Mockery can best be described as an iOS micro web routing framework (similar to Ruby's Sinatra and Python's Flask). Define routes that listen for HTTP requests using GET, POST, PUT, DELETE using NSURLConnection, AFNetworking, any of your other go-to networking libraries.
 
 Mockery registeres a custom NSURLProtocol that listens for a URL that you define giving you full access to the NSURLRequest.
 
