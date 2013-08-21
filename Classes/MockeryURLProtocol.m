@@ -25,14 +25,21 @@
     id<NSURLProtocolClient> client = [self client];
     NSURLRequest* request = [self request];
 
-    MockeryResponse *mockeryResponse = [Mockery hit:request];
-    
-    NSHTTPURLResponse* response = [[NSHTTPURLResponse alloc] initWithURL:[request URL] statusCode:mockeryResponse.status HTTPVersion:@"HTTP/1.1" headerFields:[NSDictionary dictionary]];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-    
-    [client URLProtocol:self didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageNotAllowed];
-    [client URLProtocol:self didLoadData:mockeryResponse.data];
-    [client URLProtocolDidFinishLoading:self];
+        MockeryResponse *mockeryResponse = [Mockery hit:request];
+        
+        dispatch_async(dispatch_get_main_queue(), ^(void) {
+       
+            NSHTTPURLResponse* response = [[NSHTTPURLResponse alloc] initWithURL:[request URL] statusCode:mockeryResponse.status HTTPVersion:@"HTTP/1.1" headerFields:[NSDictionary dictionary]];
+            
+            
+            [client URLProtocol:self didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageNotAllowed];
+            [client URLProtocol:self didLoadData:mockeryResponse.data];
+            [client URLProtocolDidFinishLoading:self];
+            
+        });
+    });
     
 }
 

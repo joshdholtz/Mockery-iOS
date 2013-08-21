@@ -37,6 +37,8 @@
         NSString *responseString = @"Hey yo hey";
         NSData* data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
         
+        [NSThread sleepForTimeInterval:5.0f];
+        
         return [[MockeryResponse alloc] initWithStatus:200 data:data];
     }];
     

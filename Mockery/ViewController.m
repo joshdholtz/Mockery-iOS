@@ -25,14 +25,14 @@
         NSLog(@"Response - %d %@", httpResponse.statusCode, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     }];
     
-    // Another example
+    // Another example - GET
     request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://mockery/stuff/4/more/3"]];
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
         NSLog(@"Response - %d %@", httpResponse.statusCode, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
     }];
     
-    // Another example
+    // Another example - POST
     request = [NSMutableURLRequest
                requestWithURL:[NSURL URLWithString:@"http://mockery/stuff"]];
     [request setHTTPMethod:@"POST"];
