@@ -42,6 +42,14 @@ iOS Web Framework??? Not sure what to call yet but I'm using it to mock an API l
         
         return [[MockeryResponse alloc] initWithStatus:200 data:data];
     }];
+    
+    // Defines a POST route for "/stuff/
+    [Mockery post:@"/stuff" block:^MockeryResponse *(NSString *path, NSURLRequest *request, NSArray *routeParams) {
+        NSString *responseString = @"We could be adding an object to core data here";
+        NSData* data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
+        
+        return [[MockeryResponse alloc] initWithStatus:200 data:data];
+    }];
 }
 
 
@@ -55,7 +63,23 @@ iOS Web Framework??? Not sure what to call yet but I'm using it to mock an API l
     [super viewDidLoad];
     
     // Any NSURLRequest with URL starting with your defined Mockery prefix with return your response
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"http://mockery/stuff/4/more/3"]];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://mockery/stuff"]];
+    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+        NSLog(@"Response - %d %@", httpResponse.statusCode, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    }];
+    
+    // Another example - GET
+    request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://mockery/stuff/4/more/3"]];
+    [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+        NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
+        NSLog(@"Response - %d %@", httpResponse.statusCode, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
+    }];
+    
+    // Another example - POST
+    request = [NSMutableURLRequest
+               requestWithURL:[NSURL URLWithString:@"http://mockery/stuff"]];
+    [request setHTTPMethod:@"POST"];
     [NSURLConnection sendAsynchronousRequest:request queue:[[NSOperationQueue alloc] init] completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse*)response;
         NSLog(@"Response - %d %@", httpResponse.statusCode, [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding]);
