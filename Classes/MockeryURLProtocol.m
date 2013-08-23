@@ -27,15 +27,12 @@
 
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-        MockeryResponse *mockeryResponse = [Mockery hit:request];
+        MockeryHTTPURLResponse *response = [Mockery hit:request];
         
         dispatch_async(dispatch_get_main_queue(), ^(void) {
-       
-            NSHTTPURLResponse* response = [[NSHTTPURLResponse alloc] initWithURL:[request URL] statusCode:mockeryResponse.status HTTPVersion:@"HTTP/1.1" headerFields:[NSDictionary dictionary]];
-            
             
             [client URLProtocol:self didReceiveResponse:response cacheStoragePolicy:NSURLCacheStorageNotAllowed];
-            [client URLProtocol:self didLoadData:mockeryResponse.data];
+            [client URLProtocol:self didLoadData:response.data];
             [client URLProtocolDidFinishLoading:self];
             
         });

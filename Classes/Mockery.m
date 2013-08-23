@@ -41,7 +41,7 @@ static Mockery *sharedInstance = nil;
     return sharedInstance.urlPrefix;
 }
 
-+ (MockeryResponse*)hit:(NSURLRequest *)request {
++ (MockeryHTTPURLResponse*)hit:(NSURLRequest *)request {
     NSDictionary *mockResponses;
     NSString *method = [request.HTTPMethod uppercaseString];
     if ([method isEqualToString:@"POST"]) {
@@ -89,7 +89,7 @@ static Mockery *sharedInstance = nil;
     return self;
 }
 
-- (MockeryResponse*)findRoute:(NSURLRequest *)request withMockResponse:(NSDictionary*)actionMockResponses {
+- (MockeryHTTPURLResponse*)findRoute:(NSURLRequest *)request withMockResponse:(NSDictionary*)actionMockResponses {
     
     NSString *pathString = [[request URL] absoluteString];
     NSString *route = [pathString stringByReplacingOccurrencesOfString:[Mockery urlPrefix] withString:@""];
@@ -119,7 +119,7 @@ static Mockery *sharedInstance = nil;
                     }
                     
                     ResponseBlock mockeryBlock = [actionMockResponses objectForKey:key];
-                    MockeryResponse *mockeryResponse = mockeryBlock(pathString, request, params);
+                    MockeryHTTPURLResponse *mockeryResponse = mockeryBlock(pathString, request, params);
                     
                     return mockeryResponse;
                 }
@@ -129,7 +129,7 @@ static Mockery *sharedInstance = nil;
         
     }
     
-    return [[MockeryResponse alloc] initWithStatus:404 data:nil];;
+    return [MockeryHTTPURLResponse mockeryWithURL:request.URL statusCode:404 data:nil headerFields:[NSDictionary dictionary]];
     
 }
 

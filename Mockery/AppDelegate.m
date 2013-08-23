@@ -33,31 +33,32 @@
     [Mockery mockeryWithURL:@"http://mockery"];
     
     // Defines a GET route for "/stuff/
-    [Mockery get:@"/stuff" block:^MockeryResponse *(NSString *path, NSURLRequest *request, NSArray *routeParams) {
+    [Mockery get:@"/stuff" block:^MockeryHTTPURLResponse *(NSString *path, NSURLRequest *request, NSArray *routeParams) {
         NSString *responseString = @"Hey yo hey";
         NSData* data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
         
+        // All of this runs in a background thread so this won't effect your application's responsiveness
         [NSThread sleepForTimeInterval:5.0f];
         
-        return [[MockeryResponse alloc] initWithStatus:200 data:data];
+        return [MockeryHTTPURLResponse mockeryWithURL:request.URL statusCode:200 data:data headerFields:@{}];
     }];
     
     // Defines a GET route for "/stuff/:some_number/more/:some_other_number" where :some_number and :some_other_number are stored in routeParams array
-    [Mockery get:[NSRegularExpression regularExpressionWithPattern:@"^/stuff/(\\d+)/more/(\\d+)?" options:NSRegularExpressionCaseInsensitive error:nil] block:^MockeryResponse *(NSString *path, NSURLRequest *request, NSArray *routeParams) {
+    [Mockery get:[NSRegularExpression regularExpressionWithPattern:@"^/stuff/(\\d+)/more/(\\d+)?" options:NSRegularExpressionCaseInsensitive error:nil] block:^MockeryHTTPURLResponse *(NSString *path, NSURLRequest *request, NSArray *routeParams) {
         NSLog(@"Route params - %@", routeParams);
         
         NSString *responseString = @"We found this regex";
         NSData* data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
         
-        return [[MockeryResponse alloc] initWithStatus:200 data:data];
+        return [MockeryHTTPURLResponse mockeryWithURL:request.URL statusCode:200 data:data headerFields:@{}];
     }];
     
     // Defines a POST route for "/stuff/
-    [Mockery post:@"/stuff" block:^MockeryResponse *(NSString *path, NSURLRequest *request, NSArray *routeParams) {
+    [Mockery post:@"/stuff" block:^MockeryHTTPURLResponse *(NSString *path, NSURLRequest *request, NSArray *routeParams) {
         NSString *responseString = @"We could be adding an object to core data here";
         NSData* data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
         
-        return [[MockeryResponse alloc] initWithStatus:200 data:data];
+        return [MockeryHTTPURLResponse mockeryWithURL:request.URL statusCode:200 data:data headerFields:@{}];
     }];
 }
 

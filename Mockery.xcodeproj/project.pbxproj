@@ -20,7 +20,7 @@
 		034A4AC017C51189009FA75F /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 034A4ABE17C51189009FA75F /* ViewController.xib */; };
 		034A4ACD17C51233009FA75F /* MockeryURLProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 034A4ACC17C51233009FA75F /* MockeryURLProtocol.m */; };
 		034A4AD017C51254009FA75F /* Mockery.m in Sources */ = {isa = PBXBuildFile; fileRef = 034A4ACF17C51254009FA75F /* Mockery.m */; };
-		034A4AD317C51B21009FA75F /* MockeryResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 034A4AD217C51B20009FA75F /* MockeryResponse.m */; };
+		03DBA03517C70F4200F74DE0 /* MockeryHTTPURLResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 03DBA03417C70F4200F74DE0 /* MockeryHTTPURLResponse.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,8 +44,8 @@
 		034A4ACC17C51233009FA75F /* MockeryURLProtocol.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockeryURLProtocol.m; sourceTree = "<group>"; };
 		034A4ACE17C51254009FA75F /* Mockery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Mockery.h; sourceTree = "<group>"; };
 		034A4ACF17C51254009FA75F /* Mockery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Mockery.m; sourceTree = "<group>"; };
-		034A4AD117C51B20009FA75F /* MockeryResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockeryResponse.h; sourceTree = "<group>"; };
-		034A4AD217C51B20009FA75F /* MockeryResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockeryResponse.m; sourceTree = "<group>"; };
+		03DBA03317C70F4200F74DE0 /* MockeryHTTPURLResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MockeryHTTPURLResponse.h; sourceTree = "<group>"; };
+		03DBA03417C70F4200F74DE0 /* MockeryHTTPURLResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MockeryHTTPURLResponse.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,12 +120,12 @@
 		034A4AC717C511C1009FA75F /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				03DBA03317C70F4200F74DE0 /* MockeryHTTPURLResponse.h */,
+				03DBA03417C70F4200F74DE0 /* MockeryHTTPURLResponse.m */,
 				034A4ACB17C51233009FA75F /* MockeryURLProtocol.h */,
 				034A4ACC17C51233009FA75F /* MockeryURLProtocol.m */,
 				034A4ACE17C51254009FA75F /* Mockery.h */,
 				034A4ACF17C51254009FA75F /* Mockery.m */,
-				034A4AD117C51B20009FA75F /* MockeryResponse.h */,
-				034A4AD217C51B20009FA75F /* MockeryResponse.m */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -201,7 +201,7 @@
 				034A4ABD17C51189009FA75F /* ViewController.m in Sources */,
 				034A4ACD17C51233009FA75F /* MockeryURLProtocol.m in Sources */,
 				034A4AD017C51254009FA75F /* Mockery.m in Sources */,
-				034A4AD317C51B21009FA75F /* MockeryResponse.m in Sources */,
+				03DBA03517C70F4200F74DE0 /* MockeryHTTPURLResponse.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -324,6 +324,7 @@
 				034A4AC517C51189009FA75F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

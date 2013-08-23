@@ -8,9 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MockeryResponse.h"
+#import "MockeryHTTPURLResponse.h"
 
-typedef MockeryResponse* (^ResponseBlock)(NSString *, NSURLRequest*, NSArray *routeParams);
+typedef MockeryHTTPURLResponse* (^ResponseBlock)(NSString *, NSURLRequest*, NSArray *routeParams);
 
 @interface Mockery : NSObject
 
@@ -22,6 +22,6 @@ typedef MockeryResponse* (^ResponseBlock)(NSString *, NSURLRequest*, NSArray *ro
 + (void)put:(id)pathStringOrRegex block:(ResponseBlock)responseBlock;
 + (void)delete:(id)pathStringOrRegex block:(ResponseBlock)responseBlock;
 
-+ (MockeryResponse*)hit:(NSURLRequest*)request;
++ (MockeryHTTPURLResponse*)hit:(NSURLRequest*)request;
 
 @end
