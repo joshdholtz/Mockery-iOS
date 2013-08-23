@@ -23,7 +23,7 @@ The only use I have found for this (so far) is making mock APIs for rapid protyp
     NSString *responseString = @"Hey yo hey";
     NSData* data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
     
-    return [[MockeryResponse alloc] initWithStatus:200 data:data];
+    return [MockeryHTTPURLResponse mockeryWithURL:request.URL statusCode:200 data:data headerFields:@{}];
 }];
 ````
 
@@ -63,7 +63,7 @@ NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWit
         NSString *responseString = @"Hey yo hey";
         NSData* data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
         
-        return [[MockeryResponse alloc] initWithStatus:200 data:data];
+        return [MockeryHTTPURLResponse mockeryWithURL:request.URL statusCode:200 data:data headerFields:@{}];
     }];
     
     // Defines a GET route for "/stuff/:some_number/more/:some_other_number" where :some_number and :some_other_number are stored in routeParams array
@@ -73,7 +73,7 @@ NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWit
         NSString *responseString = @"We found this regex";
         NSData* data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
         
-        return [[MockeryResponse alloc] initWithStatus:200 data:data];
+        return [MockeryHTTPURLResponse mockeryWithURL:request.URL statusCode:200 data:data headerFields:@{}];
     }];
     
     // Defines a POST route for "/stuff/
@@ -81,7 +81,7 @@ NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWit
         NSString *responseString = @"We could be adding an object to core data here";
         NSData* data = [responseString dataUsingEncoding:NSUTF8StringEncoding];
         
-        return [[MockeryResponse alloc] initWithStatus:200 data:data];
+        return [MockeryHTTPURLResponse mockeryWithURL:request.URL statusCode:200 data:data headerFields:@{}];
     }];
 }
 
